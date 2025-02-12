@@ -19,22 +19,22 @@ if openCameraSafely(cap):
 		faces, gray = detectFace(frame)
 
 		if faces is not None:
-		    pframe, landmarks, coords = processLandmarks(frame, faces, gray)
-		    detectblink(coords, frame)
-		    p1, p2 = processOrientation(pframe, landmarks)
-		    presentFrame(pframe, p1, p2)
-		    x = p2[0]
-		    y = p2[1]
-		    #remap 
-		    raw_cursor = map_coordinates(x, y, old_range_x, old_range_y, [-50, 50], [-50, 50] )
-		    # clamp values between -10 and 10 
-		    clamped_cursor = clamp_values(raw_cursor)
+			pframe, landmarks, coords = processLandmarks(frame, faces, gray)
+			detectblink(coords, frame)
+			p1, p2 = processOrientation(pframe, landmarks)
+			presentFrame(pframe, p1, p2)
+			x = p2[0]
+			y = p2[1]
+			#remap 
+			raw_cursor = map_coordinates(x, y, old_range_x, old_range_y, [-50, 50], [-50, 50] )
+			# clamp values between -10 and 10 
+			clamped_cursor = clamp_values(raw_cursor)
 
-		    ma_filter = MovingAverageFilterPair(window_size=10)
-		    avg_cursor = ma_filter.update(clamped_cursor)
-		   
+			ma_filter = MovingAverageFilterPair(window_size=10)
+			avg_cursor = ma_filter.update(clamped_cursor)
 
-		    mouse.move(clamped_cursor[0], clamped_cursor[1], absolute = False)
+
+			mouse.move(clamped_cursor[0], clamped_cursor[1], absolute = False)
 
 		else:
 			presentFrameNoLm(frame)
@@ -43,7 +43,8 @@ if openCameraSafely(cap):
 		if cv2.waitKey(1) & 0xFF == ord('q'):
 		    break
 
-	# Release the camera and close the window
-	cap.release()
-	cv2.destroyAllWindows()
+# Release the camera and close the window
+cap.release()
+cv2.destroyAllWindows()
 
+#This line tests Git Push Updates in Jira
